@@ -120,7 +120,7 @@ tone_instructions: "Be direct and technical. Focus on correctness and maintainab
 
 reviews:
   profile: "chill"  # or "assertive" for stricter reviews
-  review_status: false  # set true to keep status messages
+  review_status: true  # Set to false to disable status comments and only trigger via labels/flags
 
   path_filters:
     - "!**/*.md"
@@ -162,9 +162,8 @@ reviews:
     base_branches:
       - "main"
       - "master"
-    # labels:
+    # labels:  # Uncomment to require specific labels for auto-review
     #   - "needs-review"
-    # Note: labels make CodeRabbit require at least one label on each PR.
 
   pre_merge_checks:
     custom_checks:
@@ -243,9 +242,31 @@ knowledge_base:
       - "**/*.py"
 ```
 
-Tip: If CodeRabbit reports required labels, remove `reviews.auto_review.labels` unless you intentionally want label gating. To hide review status messages, set `reviews.review_status: false`.
+## Configuration Options
 
-Reference: The full configuration reference is available in the CodeRabbit docs at https://docs.coderabbit.ai/reference/configuration.
+### Review Status Messages
+
+By default, `review_status: true` posts a status comment on every PR indicating CodeRabbit is reviewing. To disable these status messages and only trigger reviews via labels or explicit flags, set:
+
+```yaml
+reviews:
+  review_status: false
+```
+
+This is useful for high-volume repos where status messages add noise.
+
+### Label-Gated Reviews
+
+By default, auto_review runs on all PRs. To require specific labels before triggering a review, add:
+
+```yaml
+reviews:
+  auto_review:
+    labels:
+      - "needs-review"
+```
+
+**Warning:** If labels are configured, PRs without those labels will be skipped with "Review skipped - Auto reviews are limited based on label configuration."
 
 ## Custom Check Derivation Guide
 
@@ -299,17 +320,11 @@ The generated file MUST be named `.coderabbit.yaml` (with leading dot) and place
 
 ## Validation
 
-After generating, validate the configuration. The validator script provides CodeRabbit-specific checks (requires PyYAML):
-
-```bash
-python3 scripts/validate_coderabbit_yaml.py --config .coderabbit.yaml
-```
-
-Manual checks:
+After generating, validate the configuration:
 
 ```bash
 # Check YAML syntax
-python3 -c "import yaml; yaml.safe_load(open('.coderabbit.yaml'))"
+python -c "import yaml; yaml.safe_load(open('.coderabbit.yaml'))"
 
 # CRITICAL: Verify custom_checks count (max 5 allowed by CodeRabbit schema)
 grep -A 1 "custom_checks:" .coderabbit.yaml | grep -c "name:" || true
