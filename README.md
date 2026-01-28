@@ -17,6 +17,13 @@ Ask your agent to run the skill on the current repository, for example:
 scripts/run_analysis.sh --repo-path /path/to/repo --repo owner/name
 ```
 
+## Optional: validate a .coderabbit.yaml
+Requires PyYAML (`pip install pyyaml`). The validator warns about label gating and review status messages.
+
+```bash
+python3 scripts/validate_coderabbit_yaml.py --config .coderabbit.yaml
+```
+
 ## What you get
 - `analysis/pr-data.json`
 - `analysis/commit-log.txt`

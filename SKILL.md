@@ -120,6 +120,7 @@ tone_instructions: "Be direct and technical. Focus on correctness and maintainab
 
 reviews:
   profile: "chill"  # or "assertive" for stricter reviews
+  review_status: false  # set true to keep status messages
 
   path_filters:
     - "!**/*.md"
@@ -161,8 +162,9 @@ reviews:
     base_branches:
       - "main"
       - "master"
-    labels:
-      - "needs-review"
+    # labels:
+    #   - "needs-review"
+    # Note: labels make CodeRabbit require at least one label on each PR.
 
   pre_merge_checks:
     custom_checks:
@@ -241,6 +243,10 @@ knowledge_base:
       - "**/*.py"
 ```
 
+Tip: If CodeRabbit reports required labels, remove `reviews.auto_review.labels` unless you intentionally want label gating. To hide review status messages, set `reviews.review_status: false`.
+
+Reference: The full configuration reference is available in the CodeRabbit docs at https://docs.coderabbit.ai/reference/configuration.
+
 ## Custom Check Derivation Guide
 
 **REMEMBER: Maximum 5 custom_checks allowed.** Prioritize by bug severity and frequency.
@@ -293,11 +299,17 @@ The generated file MUST be named `.coderabbit.yaml` (with leading dot) and place
 
 ## Validation
 
-After generating, validate the configuration:
+After generating, validate the configuration. The validator script provides CodeRabbit-specific checks (requires PyYAML):
+
+```bash
+python3 scripts/validate_coderabbit_yaml.py --config .coderabbit.yaml
+```
+
+Manual checks:
 
 ```bash
 # Check YAML syntax
-python -c "import yaml; yaml.safe_load(open('.coderabbit.yaml'))"
+python3 -c "import yaml; yaml.safe_load(open('.coderabbit.yaml'))"
 
 # CRITICAL: Verify custom_checks count (max 5 allowed by CodeRabbit schema)
 grep -A 1 "custom_checks:" .coderabbit.yaml | grep -c "name:" || true
