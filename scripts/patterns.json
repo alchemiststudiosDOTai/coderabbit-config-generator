@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "patterns": [
+    {
+      "id": "shallow-copy-mutation",
+      "label": "Shallow copy mutation",
+      "issue": "Mutable default corruption",
+      "recommended_check": "Shallow Copy Mutation",
+      "severity": "high",
+      "keywords": [
+        "shallow copy",
+        "deep copy",
+        "deepcopy",
+        "copy()",
+        "copy("
+      ]
+    },
+    {
+      "id": "exception-path-cleanup",
+      "label": "Exception path cleanup",
+      "issue": "Incomplete cleanup after abort or exception",
+      "recommended_check": "Exception Path Cleanup",
+      "severity": "high",
+      "keywords": [
+        "abort",
+        "cancel",
+        "cleanup",
+        "rollback",
+        "exception path",
+        "finally",
+        "resource leak"
+      ]
+    },
+    {
+      "id": "silent-failure",
+      "label": "Silent failure",
+      "issue": "Errors swallowed or hidden",
+      "recommended_check": "Silent Failure Detection",
+      "severity": "high",
+      "keywords": [
+        "silent",
+        "swallow",
+        "suppressed error",
+        "ignore error",
+        "return None",
+        "no error"
+      ]
+    },
+    {
+      "id": "dependency-direction",
+      "label": "Dependency direction violation",
+      "issue": "Layering or import direction violations",
+      "recommended_check": "Dependency Direction",
+      "severity": "medium",
+      "keywords": [
+        "circular import",
+        "import cycle",
+        "dependency direction",
+        "layer violation",
+        "dependency violation"
+      ]
+    },
+    {
+      "id": "type-safety",
+      "label": "Type safety",
+      "issue": "Missing or incorrect type annotations",
+      "recommended_check": "Type Annotation Gaps",
+      "severity": "medium",
+      "keywords": [
+        "typing",
+        "mypy",
+        "type annotation",
+        "type hint",
+        "type error",
+        "typecheck"
+      ]
+    },
+    {
+      "id": "frozen-object-mutation",
+      "label": "Frozen object mutation",
+      "issue": "Mutable operations on frozen dataclasses or models",
+      "recommended_check": "Frozen Object Mutation",
+      "severity": "medium",
+      "keywords": [
+        "frozen",
+        "immutable",
+        "frozen dataclass",
+        "pydantic",
+        "model_copy"
+      ]
+    },
+    {
+      "id": "state-invariant-violation",
+      "label": "State invariant violation",
+      "issue": "Invalid or corrupted state",
+      "recommended_check": "State Invariant Violation",
+      "severity": "medium",
+      "keywords": [
+        "invalid state",
+        "state corruption",
+        "state invariant",
+        "corrupt state",
+        "state leak"
+      ]
+    }
+  ]
+}
