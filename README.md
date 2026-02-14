@@ -1,6 +1,8 @@
 # CodeRabbit Config Generator (Skill)
 
-Use this skill to turn your project’s recent PR history and commit messages into CodeRabbit checks that match the issues you actually see in practice. It surfaces recurring problems, highlights rare edge cases, and recommends custom checks that keep reviews focused on real risks.
+![Skill to turn your project's recent PR history and commit messages into CodeRabbit checks that match the issues you actually see in practice](alchemiststudios-coderabbit-2.webp)
+
+Use this skill to turn your project's recent PR history and commit messages into CodeRabbit checks that match the issues you actually see in practice. It surfaces recurring problems, highlights rare edge cases, and recommends custom checks that keep reviews focused on real risks.
 
 ## Quickstart (skill)
 Ask your agent to run the skill on the current repository, for example:
